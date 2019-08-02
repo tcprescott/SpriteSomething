@@ -1,0 +1,9 @@
+{
+	"$schema": "../../../schema/backgrounds.schema.json",
+	"backgrounds": [
+		{
+			"filename": "onett-map.png",
+			"title": "Onett Town Map"
+		}
+	]
+}

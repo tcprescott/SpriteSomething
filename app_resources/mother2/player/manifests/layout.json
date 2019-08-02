@@ -1,0 +1,134 @@
+{
+	"$schema": "../../../../schema/png-layout.schema.json",
+	"border_color": [0,0,127,255],
+	"border_size": 1,
+	"layout":
+	[
+		[ "walk_up", "walk_up1", "walk_right", "walk_right1" ],
+		[ "walk_down", "walk_down1", "walk_left", "walk_left1" ],
+		[ "walk_ne", "walk_ne1", "walk_se", "walk_se1" ],
+		[ "walk_sw", "walk_sw1", "walk_nw", "walk_nw1" ],
+		[ "palette_block" ]
+	],
+	"images": {
+		"walk_up": {
+			"dimensions": [0,0,16,24],
+			"import palette interval": [1,1],
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_up1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_right": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_right1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_down": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_down1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_left": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_left1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_ne": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_ne1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_se": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_se1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_sw": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_sw1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_nw": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"walk_nw1": {
+			"dimensions": [0,0,16,24],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		},
+		"palette_block": {
+			"dimensions": [-16,-2,16,1],
+			"parent": "walk_up",
+			"used by": [
+				["TODO",0]
+			]
+		}
+	}
+}
