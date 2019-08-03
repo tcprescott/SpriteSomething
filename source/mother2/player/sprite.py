@@ -4,6 +4,7 @@ from source import common
 class Sprite(SpriteParent):
 	def __init__(self, filename, manifest_dict, my_subpath):
 		super().__init__(filename, manifest_dict, my_subpath)
+		self.use_palettes = False
 
 	def import_from_ROM(self, rom):
 		pass

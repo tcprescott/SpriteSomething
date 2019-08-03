@@ -1,14 +1,13 @@
 {
 	"$schema": "../../../../schema/png-layout.schema.json",
-	"border_color": [0,0,127,255],
-	"border_size": 1,
+	"border_color": [0,0,0,255],
+	"border_size": 0,
 	"layout":
 	[
 		[ "walk_up", "walk_up1", "walk_right", "walk_right1" ],
 		[ "walk_down", "walk_down1", "walk_left", "walk_left1" ],
 		[ "walk_ne", "walk_ne1", "walk_se", "walk_se1" ],
-		[ "walk_sw", "walk_sw1", "walk_nw", "walk_nw1" ],
-		[ "palette_block" ]
+		[ "walk_sw", "walk_sw1", "walk_nw", "walk_nw1" ]
 	],
 	"images": {
 		"walk_up": {

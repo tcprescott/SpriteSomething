@@ -28,6 +28,7 @@ class SpriteParent():
 			self.overview_scale_factor = manifest_dict["input"]["png"]["overview-scale-factor"]
 		self.plugins = None
 		self.has_plugins = False
+		self.use_palettes = True
 		self.layout = layoutlib.Layout(common.get_resource([self.resource_subpath,"manifests"],"layout.json"))
 		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
 			self.animations = json.load(file)
@@ -67,7 +68,10 @@ class SpriteParent():
 		# and to implement dynamic palettes by leveraging the frame number
 
 		#if the child class didn't tell us what to do, just go back to whatever palette it was on when it was imported
-		return self.master_palette[default_range[0]:default_range[1]]
+		if self.use_palettes:
+			return self.master_palette[default_range[0]:default_range[1]]
+		else:
+			return []
 
 	############################# END ABSTRACT CODE ##############################
 
@@ -199,7 +203,10 @@ class SpriteParent():
 
 			working_image = Image.new('RGBA',(max_x-min_x,max_y-min_y),0)   #start out with a transparent image that is correctly sized
 			for new_image,(x,y) in tile_list:
-				working_image.paste(new_image,(x-min_x,y-min_y),new_image)   #the third argument is the transparency mask, so it is not redudant to use the same variable name twice
+				if self.use_palettes:
+					working_image.paste(new_image,(x-min_x,y-min_y),new_image)   #the third argument is the transparency mask, so it is not redudant to use the same variable name twice
+				else:
+					working_image.paste(new_image,(x-min_x,y-min_y))   #the third argument is the transparency mask, so it is not redudant to use the same variable name twice
 			return working_image,(min_x,min_y)
 		else:
 			return Image.new('RGBA',(1,1),0), (0,0)   #blank image and dummy offset
@@ -314,7 +321,7 @@ class SpriteParent():
 		data = json.dumps({ "title": title_name, "author": author_name }, separators=(',',':')).encode('utf-8')
 
 		META_DATA_BLOCK_TYPE = 0
-		return [(META_DATA_BLOCK_TYPE, bytearray(common.as_u32(len(data))) + data)];
+		return [(META_DATA_BLOCK_TYPE, bytearray(common.as_u32(len(data))) + data)]
 
 	def get_master_PNG_image(self):
-		return self.layout.export_all_images_to_PNG(self.images,self.master_palette)
+		return self.layout.export_all_images_to_PNG(self.images,self.master_palette,self.use_palettes)
