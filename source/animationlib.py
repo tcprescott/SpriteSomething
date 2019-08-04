@@ -20,7 +20,25 @@ class AnimationEngineParent():
 		self.prev_palette_info = []
 
 		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
-			self.animations = json.load(file)
+			ani_manifest = json.load(file)
+			#if we have many animation sets defined
+			if "sets" in ani_manifest:
+				#cycle through sets
+				for ani_set in ani_manifest["sets"]:
+					#find matching single name
+					if "name" in ani_set:
+						if self.sprite.filename_parts["slug"] == ani_set["name"] and "animations" in ani_set:
+							self.animations = ani_set["animations"]
+					#find matching name in array of names
+					elif "names" in ani_set:
+						if self.sprite.filename_parts["slug"] in ani_set["names"] and "animations" in ani_set:
+							self.animations = ani_set["animations"]
+				#we didn't find anything :(
+				if not hasattr(self,"animations"):
+					raise AssertionError("No Animations Found for \"" + self.classic_name + "\" sheet called \"" + self.filename_parts["slug"] + "\" :(")
+			#else, we only have one set of animations defined
+			else:
+				self.animations = ani_manifest
 		if "$schema" in self.animations:
 			del self.animations["$schema"]
 
@@ -154,7 +172,7 @@ class AnimationEngineParent():
 
 	def get_current_direction(self):
 		if self.spiffy_dict:
-			direction = self.spiffy_dict["facing_var"].get().lower()   #grabbed from the direction buttons, which are named "facing"
+			direction = self.spiffy_dict["facing_var"].get().lower() if "facing_var" in self.spiffy_dict else "right"   #grabbed from the direction buttons, which are named "facing"
 			if "aiming_var" in self.spiffy_dict:
 				direction = "_aim_".join([direction, self.spiffy_dict["aiming_var"].get().lower()])
 			return direction
@@ -243,11 +261,11 @@ class AnimationEngineParent():
 		new_size = tuple(int(dim*self.zoom_getter()) for dim in current_image.size)
 		img_to_save = current_image.resize(new_size,resample=Image.NEAREST)
 		img_to_save.save(filename)
-		
+
 	def export_animation_as_collage(self, filename, orientation="horizontal"):
 		#TODO: should this be factored out to the sprite class as some kind of export_as_collage(animation, direction, ..., filename) call?
 		image_list = []
-		
+
 		displayed_direction = self.get_current_direction()
 		pose_list = self.get_current_pose_list(displayed_direction)
 		if not pose_list:

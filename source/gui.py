@@ -789,6 +789,8 @@ class SpriteSomethingMainFrame(tk.Frame):
 		text.bind("<Button-1>", lambda e: txtEvent(e))
 
 	#write working dirs to file
+	# permissions error on linux here if the file doesn't exist yet for some reason but we don't want to clobber it if it already does
+	#  predicament/quandary/conundrum
 	def save_working_dirs(self):
 		f = open("./user_resources/meta/manifests/working_dirs.json","w+")
 		f.write(json.dumps(self.working_dirs,indent=2))

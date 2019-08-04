@@ -23,6 +23,7 @@ class SpriteParent():
 		self.resource_subpath = my_subpath           #the path to this sprite's subfolder in resources
 		self.metadata = {"sprite.name": "","author.name":"","author.name-short":""}
 		self.filename = filename
+		self.filename_parts = {"basename":os.path.basename(filename),"slug":os.path.splitext(os.path.basename(filename))[0],"filext":os.path.splitext(filename)[1]}
 		self.overview_scale_factor = 2
 		if "input" in manifest_dict and "png" in manifest_dict["input"] and "overview-scale-factor" in manifest_dict["input"]["png"]:
 			self.overview_scale_factor = manifest_dict["input"]["png"]["overview-scale-factor"]
@@ -30,8 +31,30 @@ class SpriteParent():
 		self.has_plugins = False
 		self.use_palettes = True
 		self.layout = layoutlib.Layout(common.get_resource([self.resource_subpath,"manifests"],"layout.json"))
+
 		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
-			self.animations = json.load(file)
+			ani_manifest = json.load(file)
+			#if we have many animation sets defined
+			if "sets" in ani_manifest:
+				#cycle through sets
+				for ani_set in ani_manifest["sets"]:
+					#find matching single name
+					if "name" in ani_set:
+						if self.filename_parts["slug"] == ani_set["name"] and "animations" in ani_set:
+							self.animations = ani_set["animations"]
+					#find matching name in array of names
+					elif "names" in ani_set:
+						if self.filename_parts["slug"] in ani_set["names"] and "animations" in ani_set:
+							self.animations = ani_set["animations"]
+				#we didn't find anything :(
+				if not hasattr(self,"animations"):
+					raise AssertionError("No Animations Found for \"" + self.classic_name + "\" sheet called \"" + self.filename_parts["slug"] + "\" :(")
+			#else, we only have one set of animations defined
+			else:
+				self.animations = ani_manifest
+		if "$schema" in self.animations:
+			del self.animations["$schema"]
+
 		self.import_from_filename()
 
 	#to make a new sprite class, you must write code for all of the functions in this section below.
@@ -78,7 +101,7 @@ class SpriteParent():
 	#the functions below here are special to the parent class and do not need to be overwritten, unless you see a reason
 
 	def import_from_filename(self):
-		_,file_extension = os.path.splitext(self.filename)
+		file_extension = self.filename_parts["filext"]
 		if file_extension.lower() == '.png':
 			self.import_from_PNG()
 		elif file_extension.lower() == '.zspr':

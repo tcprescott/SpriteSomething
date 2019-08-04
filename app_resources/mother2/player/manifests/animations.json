@@ -1,51 +1,70 @@
 {
 	"$schema": "../../../../schema/animations.schema.json",
-	"Stand": {
-		"right": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_right",  "pos": [0,0]}	]	}
-		],
-		"up": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_up",  "pos": [0,0]}	]	}
-		],
-		"down": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_down",  "pos": [0,0]}	]	}
-		],
-		"left": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_left",  "pos": [0,0]}	]	}
-		]
-	},
-	"Walk": {
-		"right": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_right",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_right1",  "pos": [0,0]}	]	}
-		],
-		"ne": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_ne",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_ne1",  "pos": [0,0]}	]	}
-		],
-		"up": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_up",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_up1",  "pos": [0,0]}	]	}
-		],
-		"down": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_down",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_down1",  "pos": [0,0]}	]	}
-		],
-		"sw": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_sw",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_sw1",  "pos": [0,0]}	]	}
-		],
-		"left": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_left",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_left1",  "pos": [0,0]}	]	}
-		],
-		"nw": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_nw",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_nw1",  "pos": [0,0]}	]	}
-		],
-		"se": [
-			{	"frames": 10,	"tiles": [	{"image": "walk_se",  "pos": [0,0]}	]	},
-			{	"frames": 10,	"tiles": [	{"image": "walk_se1",  "pos": [0,0]}	]	}
-		]
-	}
+	"sets": [
+		{
+			"names": [ "001","005","006" ],
+			"animations": {
+				"Stand": {
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_up",  "pos": [0,0]}	]	}
+					],
+					"diag_upright": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_upright",  "pos": [0,0]}	]	}
+					],
+					"right": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_right",  "pos": [0,0]}	]	}
+					],
+					"diag_downright": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_downright",  "pos": [0,0]}	]	}
+					],
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_down",  "pos": [0,0]}	]	}
+					],
+					"diag_downleft": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_downleft",  "pos": [0,0]}	]	}
+					],
+					"left": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_left",  "pos": [0,0]}	]	}
+					],
+					"diag_upleft": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_upleft",  "pos": [0,0]}	]	}
+					]
+				},
+				"Walk": {
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_up",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_up1",  "pos": [0,0]}	]	}
+					],
+					"diag_upright": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_upright",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_upright1",  "pos": [0,0]}	]	}
+					],
+					"right": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_right",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_right1",  "pos": [0,0]}	]	}
+					],
+					"diag_downright": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_downright",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_downright1",  "pos": [0,0]}	]	}
+					],
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_down",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_down1",  "pos": [0,0]}	]	}
+					],
+					"diag_downleft": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_downleft",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_downleft1",  "pos": [0,0]}	]	}
+					],
+					"left": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_left",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_left1",  "pos": [0,0]}	]	}
+					],
+					"diag_upleft": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_upleft",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_upleft1",  "pos": [0,0]}	]	}
+					]
+				}
+			}
+		}
+	]
 }

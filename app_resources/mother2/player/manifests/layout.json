@@ -6,8 +6,8 @@
 	[
 		[ "walk_up", "walk_up1", "walk_right", "walk_right1" ],
 		[ "walk_down", "walk_down1", "walk_left", "walk_left1" ],
-		[ "walk_ne", "walk_ne1", "walk_se", "walk_se1" ],
-		[ "walk_sw", "walk_sw1", "walk_nw", "walk_nw1" ]
+		[ "walk_upright", "walk_upright1", "walk_downright", "walk_downright1" ],
+		[ "walk_downleft", "walk_downleft1", "walk_upleft", "walk_upleft1" ]
 	],
 	"images": {
 		"walk_up": {
@@ -26,105 +26,91 @@
 		},
 		"walk_right": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
 		"walk_right1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_right",
 			"used by": [
 				["TODO",0]
 			]
 		},
 		"walk_down": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
 		"walk_down1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_down",
 			"used by": [
 				["TODO",0]
 			]
 		},
 		"walk_left": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
 		"walk_left1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_left",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_ne": {
+		"walk_upright": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_ne1": {
+		"walk_upright1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_upright",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_se": {
+		"walk_downright": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_se1": {
+		"walk_downright1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_downright",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_sw": {
+		"walk_downleft": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_sw1": {
+		"walk_downleft1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
+			"parent": "walk_downleft",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_nw": {
+		"walk_upleft": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
 			"used by": [
 				["TODO",0]
 			]
 		},
-		"walk_nw1": {
+		"walk_upleft1": {
 			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"palette_block": {
-			"dimensions": [-16,-2,16,1],
-			"parent": "walk_up",
+			"parent": "walk_upleft",
 			"used by": [
 				["TODO",0]
 			]

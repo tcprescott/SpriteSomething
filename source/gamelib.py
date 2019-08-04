@@ -44,23 +44,43 @@ def autodetect(sprite_filename):
 			if os.path.isdir(os.path.join(search_path,item)) and not item == "meta":
 				game_name = item
 				sprite_manifest_filename = os.path.join(search_path,game_name,"manifests","manifest.json")
+				#open the sprite manifest for this game
 				with open(sprite_manifest_filename) as f:
 					sprite_manifest = json.load(f)
+					#cycle through sprite IDs
 					for sprite_id in sprite_manifest:
+						#if we've got png data defined
 						if "input" in sprite_manifest[sprite_id] and "png" in sprite_manifest[sprite_id]["input"]:
+							#if we've got png dimensions defined
 							if "dims" in sprite_manifest[sprite_id]["input"]["png"]:
 								check_size = sprite_manifest[sprite_id]["input"]["png"]["dims"]
+								#if the loaded image matches these dimensions, return this
 								if loaded_image.size == tuple(check_size):
 									game = get_game_class_of_type(game_name)
 									sprite, animation_assist = game.make_player_sprite(sprite_filename)
 									game_found = True
+							#turns out the png manifest we've got has many images
 							elif isinstance(sprite_manifest[sprite_id]["input"]["png"],list):
+								#cycle through defined pngs
 								for png in sprite_manifest[sprite_id]["input"]["png"]:
-									if "dims" in png:
+									#if we've got a png name defined
+									if "name" in png:
+										#if the loaded image matches the filename slug, return this
+										if png["name"] == os.path.splitext(os.path.basename(sprite_filename))[0]:
+											if "dims" in png:
+												print(game_name + " Detected; " + png["name"] + " sheet; " + str(png["dims"]) + " dims; ")
+											game = get_game_class_of_type(game_name)
+											sprite, animation_assist = game.make_player_sprite(sprite_filename)
+											game_found = True
+									#else, if we've got png dimensions defined
+									if not game_found and "dims" in png:
 										check_size = png["dims"]
+										#if the loaded image matches these dimensions, return this
+										#this will return the first match, not idea for EarthBound since several sheets are the same dimensions
+										# however, we do seem to have a standard of filenames for the sheets
 										if loaded_image.size == tuple(check_size):
 											if "name" in png:
-												print(game_name + " Detected; " + png["name"] + " sheet")
+												print(game_name + " Detected; " + str(png["dims"]) + " dims; " + png["name"] + " sheet; ")
 											game = get_game_class_of_type(game_name)
 											sprite, animation_assist = game.make_player_sprite(sprite_filename)
 											game_found = True
