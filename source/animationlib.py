@@ -35,7 +35,7 @@ class AnimationEngineParent():
 							self.animations = ani_set["animations"]
 				#we didn't find anything :(
 				if not hasattr(self,"animations"):
-					raise AssertionError("No Animations Found for \"" + self.classic_name + "\" sheet called \"" + self.filename_parts["slug"] + "\" :(")
+					raise AssertionError("No Animations Found for \"" + self.sprite.classic_name + "\" sheet called \"" + self.sprite.filename_parts["slug"] + "\" :(")
 			#else, we only have one set of animations defined
 			else:
 				self.animations = ani_manifest

@@ -65,6 +65,72 @@
 					]
 				}
 			}
+		},
+		{
+			"names": [ "007" ],
+			"animations": {
+				"Drive": {
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "drive_up",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "drive_up1",  "pos": [0,0]}	]	}
+					],
+					"right": [
+						{	"frames": 10,	"tiles": [	{"image": "drive_right",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "drive_right1",  "pos": [0,0]}	]	}
+					],
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "drive_down",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "drive_down1",  "pos": [0,0]}	]	}
+					],
+					"left": [
+						{	"frames": 10,	"tiles": [	{"image": "drive_left",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "drive_left1",  "pos": [0,0]}	]	}
+					]
+				}
+			}
+		},
+		{
+			"names": [ "008", "437" ],
+			"animations": {
+				"Walk": {
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_up",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_up1",  "pos": [0,0]}	]	}
+					],
+					"right": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_right",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_right1",  "pos": [0,0]}	]	}
+					],
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_down",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_down1",  "pos": [0,0]}	]	}
+					],
+					"left": [
+						{	"frames": 10,	"tiles": [	{"image": "walk_left",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk_left1",  "pos": [0,0]}	]	}
+					]
+				},
+				"Walk2": {
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "walk2_up",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk2_up1",  "pos": [0,0]}	]	}
+					],
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "walk2_down",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk2_down1",  "pos": [0,0]}	]	}
+					]
+				},
+				"Walk3": {
+					"down": [
+						{	"frames": 10,	"tiles": [	{"image": "walk3_down",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk3_down1",  "pos": [0,0]}	]	}
+					],
+					"up": [
+						{	"frames": 10,	"tiles": [	{"image": "walk3_up",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "walk3_up1",  "pos": [0,0]}	]	}
+					]
+				}
+			}
 		}
 	]
 }

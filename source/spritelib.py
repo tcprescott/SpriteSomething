@@ -30,8 +30,31 @@ class SpriteParent():
 		self.plugins = None
 		self.has_plugins = False
 		self.use_palettes = True
-		self.layout = layoutlib.Layout(common.get_resource([self.resource_subpath,"manifests"],"layout.json"))
 
+		#get layout
+		layout_manifest = common.get_resource([self.resource_subpath,"manifests"],"layout.json")
+		with(open(layout_manifest)) as file:
+			layout_manifest = json.load(file)
+			#if we have many layouts defined
+			if "layouts" in layout_manifest:
+				#cycle through layouts
+				for layout_set in layout_manifest["layouts"]:
+					#find matching single name
+					if "name" in layout_set:
+						if self.filename_parts["slug"] == layout_set["name"] and "layout" in layout_set:
+							self.layout = layoutlib.Layout(json.dumps(layout_set))
+					#find matching name in array of names
+					elif "names" in layout_set:
+						if self.filename_parts["slug"] in layout_set["names"] and "layout" in layout_set:
+							self.layout = layoutlib.Layout(json.dumps(layout_set))
+				#we didn't find anything :(
+				if not hasattr(self,"layout"):
+					raise AssertionError("No Layout Found for \"" + self.classic_name + "\" sheet called \"" + self.filename_parts["slug"] + "\" :(")
+			#else, we only have one layout defined
+			else:
+				self.layout = layoutlib.Layout(json.dumps(layout_manifest))
+
+		#get animations
 		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
 			ani_manifest = json.load(file)
 			#if we have many animation sets defined

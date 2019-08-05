@@ -23,12 +23,22 @@ class Sprite(SpriteParent):
 
 	def get_alternative_direction(self, animation, direction):
 		#suggest an alternative direction, which can be referenced if the original direction doesn't have an animation
+		direction_dict = self.animations[animation]
 		split_string = direction.split("_aim_")
-		facing = split_string[0]
 		aiming = split_string[1] if len(split_string) > 1 else ""
+		direction = aiming if aiming else "right"
 
-		if not aiming == "" and not aiming == "neutral":
-			return aiming
-		if not facing == "":
-			return facing
-		return "right"
+		ALTERNATIVES = {
+			"diag_upright": "up",
+			"diag_downright": "down",
+			"diag_upleft": "up",
+			"diag_downleft": "down",
+			"up": "down",
+			"left": "down",
+			"right": "down"
+		}
+
+		while(direction not in direction_dict):
+			if direction in ALTERNATIVES:
+				direction = ALTERNATIVES[direction]
+		return direction

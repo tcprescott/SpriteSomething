@@ -10,9 +10,8 @@ from PIL import Image, ImageOps, ImageDraw
 from source import common
 
 class Layout():
-	def __init__(self, filename):
-		with open(filename) as inFile:
-			self.data = json.load(inFile)
+	def __init__(self, json_data):
+		self.data = json.loads(json_data)
 		self.reverse_lookup = {}
 		for image_name,image_info in self.data["images"].items():
 			for image_ref in image_info["used by"]:

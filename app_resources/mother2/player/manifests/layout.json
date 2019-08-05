@@ -1,119 +1,306 @@
 {
 	"$schema": "../../../../schema/png-layout.schema.json",
-	"border_color": [0,0,0,255],
-	"border_size": 0,
-	"layout":
-	[
-		[ "walk_up", "walk_up1", "walk_right", "walk_right1" ],
-		[ "walk_down", "walk_down1", "walk_left", "walk_left1" ],
-		[ "walk_upright", "walk_upright1", "walk_downright", "walk_downright1" ],
-		[ "walk_downleft", "walk_downleft1", "walk_upleft", "walk_upleft1" ]
-	],
-	"images": {
-		"walk_up": {
-			"dimensions": [0,0,16,24],
-			"import palette interval": [1,1],
-			"used by": [
-				["TODO",0]
-			]
+	"layouts": [
+		{
+			"names": [ "001","005","006" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "walk_up","walk_up1","walk_right","walk_right1" ],
+				[ "walk_down","walk_down1","walk_left","walk_left1" ],
+				[ "walk_upright","walk_upright1","walk_downright","walk_downright1" ],
+				[ "walk_downleft","walk_downleft1","walk_upleft","walk_upleft1" ]
+			],
+			"images": {
+				"walk_up": {
+					"dimensions": [0,0,16,24],
+					"import palette interval": [1,1],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_up1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_right",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_left",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_upright": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_upright1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_upright",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_downright": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_downright1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_downright",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_downleft": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_downleft1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_downleft",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_upleft": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_upleft1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_upleft",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
 		},
-		"walk_up1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_up",
-			"used by": [
-				["TODO",0]
-			]
+		{
+			"names": [ "007" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "drive_up","drive_up1","drive_right","drive_right1" ],
+				[ "drive_down","drive_down1","drive_left","drive_left1" ]
+			],
+			"images": {
+				"drive_up": {
+					"dimensions": [0,0,32,48],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_up1": {
+					"dimensions": [0,0,32,48],
+					"parent": "drive_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_right": {
+					"dimensions": [0,0,32,48],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_right1": {
+					"dimensions": [0,0,32,48],
+					"parent": "drive_right",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_down": {
+					"dimensions": [0,0,32,48],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_down1": {
+					"dimensions": [0,0,32,48],
+					"parent": "drive_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_left": {
+					"dimensions": [0,0,32,48],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"drive_left1": {
+					"dimensions": [0,0,32,48],
+					"parent": "drive_left",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
 		},
-		"walk_right": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_right1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_right",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_down": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_down1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_down",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_left": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_left1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_left",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_upright": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_upright1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_upright",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_downright": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_downright1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_downright",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_downleft": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_downleft1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_downleft",
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_upleft": {
-			"dimensions": [0,0,16,24],
-			"used by": [
-				["TODO",0]
-			]
-		},
-		"walk_upleft1": {
-			"dimensions": [0,0,16,24],
-			"parent": "walk_upleft",
-			"used by": [
-				["TODO",0]
-			]
+		{
+			"names": [ "008", "437" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "walk_up",		"walk_up1",		"walk_right",	"walk_right1" ],
+				[ "walk_down",	"walk_down1",	"walk_left",	"walk_left1" ],
+				[ "walk2_up",		"walk2_up1",	"walk2_down",	"walk2_down1" ],
+				[ "walk3_down",	"walk3_down1","walk3_up",		"walk3_up1" ]
+			],
+			"images": {
+				"walk_up": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_up1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_right",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk_left",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_up": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_up1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk2_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_down": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_down1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk2_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_down": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_down1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk3_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_up": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_up1": {
+					"dimensions": [0,0,16,24],
+					"parent": "walk3_up",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
 		}
-	}
+	]
 }

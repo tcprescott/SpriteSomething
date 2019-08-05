@@ -55,7 +55,7 @@ def autodetect(sprite_filename):
 							if "dims" in sprite_manifest[sprite_id]["input"]["png"]:
 								check_size = sprite_manifest[sprite_id]["input"]["png"]["dims"]
 								#if the loaded image matches these dimensions, return this
-								if loaded_image.size == tuple(check_size):
+								if not game_found and loaded_image.size == tuple(check_size):
 									game = get_game_class_of_type(game_name)
 									sprite, animation_assist = game.make_player_sprite(sprite_filename)
 									game_found = True
@@ -64,11 +64,9 @@ def autodetect(sprite_filename):
 								#cycle through defined pngs
 								for png in sprite_manifest[sprite_id]["input"]["png"]:
 									#if we've got a png name defined
-									if "name" in png:
+									if not game_found and "name" in png:
 										#if the loaded image matches the filename slug, return this
 										if png["name"] == os.path.splitext(os.path.basename(sprite_filename))[0]:
-											if "dims" in png:
-												print(game_name + " Detected; " + png["name"] + " sheet; " + str(png["dims"]) + " dims; ")
 											game = get_game_class_of_type(game_name)
 											sprite, animation_assist = game.make_player_sprite(sprite_filename)
 											game_found = True
@@ -79,8 +77,6 @@ def autodetect(sprite_filename):
 										#this will return the first match, not idea for EarthBound since several sheets are the same dimensions
 										# however, we do seem to have a standard of filenames for the sheets
 										if loaded_image.size == tuple(check_size):
-											if "name" in png:
-												print(game_name + " Detected; " + str(png["dims"]) + " dims; " + png["name"] + " sheet; ")
 											game = get_game_class_of_type(game_name)
 											sprite, animation_assist = game.make_player_sprite(sprite_filename)
 											game_found = True
