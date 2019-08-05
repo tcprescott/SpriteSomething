@@ -33,7 +33,6 @@ class Sprite(SpriteParent):
 			"diag_downright": "down",
 			"diag_upleft": "up",
 			"diag_downleft": "down",
-			"up": "down",
 			"left": "down",
 			"right": "down"
 		}
@@ -41,4 +40,6 @@ class Sprite(SpriteParent):
 		while(direction not in direction_dict):
 			if direction in ALTERNATIVES:
 				direction = ALTERNATIVES[direction]
+			else:
+				direction = next(iter(direction_dict.keys()))
 		return direction

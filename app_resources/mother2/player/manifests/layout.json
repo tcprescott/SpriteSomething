@@ -368,6 +368,323 @@
 					]
 				}
 			}
+		},
+		{
+			"names": [ "015" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "sleep","sleep1","sleep2","sleep3" ],
+				[ "sleep4","sleep5","sleep6","sleep7" ]
+			],
+			"images": {
+				"sleep": {
+					"dimensions": [0,0,32,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep1": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep2": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep1",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep3": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep2",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep4": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep3",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep5": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep4",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep6": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep5",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"sleep7": {
+					"dimensions": [0,0,32,16],
+					"parent": "sleep6",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
+		},
+		{
+			"names": [ "016", "457" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "lay1_left","lay1_left1","lay1_left2","lay1_left3" ],
+				[ "lay2_left","lay2_left1","lay3_right","lay3_right1" ]
+			],
+			"images": {
+				"lay1_left": {
+					"dimensions": [0,0,24,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay1_left1": {
+					"dimensions": [0,0,24,16],
+					"parent": "lay1_left",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay1_left2": {
+					"dimensions": [0,0,24,16],
+					"parent": "lay1_left1",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay1_left3": {
+					"dimensions": [0,0,24,16],
+					"parent": "lay1_left2",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay2_left": {
+					"dimensions": [0,0,24,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay2_left1": {
+					"dimensions": [0,0,24,16],
+					"parent": "lay2_left",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay3_right": {
+					"dimensions": [0,0,24,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"lay3_right1": {
+					"dimensions": [0,0,24,16],
+					"parent": "lay3_right",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
+		},
+		{
+			"names": [ "027" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "walk_up",		"walk_up1",		"walk_right",	"walk_right1" ],
+				[ "walk_down",	"walk_down1",	"walk_left",	"walk_left1" ],
+				[ "walk2_up",		"walk2_up1",	"walk2_down",	"walk2_down1" ],
+				[ "walk3_down",	"walk3_down1","walk3_up",		"walk3_up1" ]
+			],
+			"images": {
+				"walk_up": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_up1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_right1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk_right",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_down1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk_left1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk_left",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_up": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_up1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk2_up",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_down": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk2_down1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk2_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_down": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_down1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk3_down",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_up": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"walk3_up1": {
+					"dimensions": [0,0,16,16],
+					"parent": "walk3_up",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
+		},
+		{
+			"names": [ "378" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "whatever",		"whatever1",	"whatever2",	"whatever3" ],
+				[ "whatever4",	"whatever5",	"whatever6",	"whatever7" ]
+			],
+			"images": {
+				"whatever": {
+					"dimensions": [0,0,16,16],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever1": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever2": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever1",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever3": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever2",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever4": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever3",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever5": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever4",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever6": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever5",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever7": {
+					"dimensions": [0,0,16,16],
+					"parent": "whatever6",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
 		}
 	]
 }
