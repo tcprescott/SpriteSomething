@@ -131,6 +131,23 @@
 					]
 				}
 			}
+		},
+		{
+			"names": [ "014", "017", "021", "335", "362" ],
+			"animations": {
+				"Whatever": {
+					"right": [
+						{	"frames": 10,	"tiles": [	{"image": "whatever",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever1",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever2",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever3",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever4",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever5",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever6",  "pos": [0,0]}	]	},
+						{	"frames": 10,	"tiles": [	{"image": "whatever7",  "pos": [0,0]}	]	}
+					]
+				}
+			}
 		}
 	]
 }

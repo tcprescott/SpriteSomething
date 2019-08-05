@@ -301,6 +301,73 @@
 					]
 				}
 			}
+		},
+		{
+			"names": [ "014", "017", "021", "335", "362" ],
+			"border_color": [0,0,0,255],
+			"border_size": 0,
+			"layout":
+			[
+				[ "whatever",		"whatever1",	"whatever2",	"whatever3" ],
+				[ "whatever4",	"whatever5",	"whatever6",	"whatever7" ]
+			],
+			"images": {
+				"whatever": {
+					"dimensions": [0,0,16,24],
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever1": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever2": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever1",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever3": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever2",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever4": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever3",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever5": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever4",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever6": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever5",
+					"used by": [
+						["TODO",0]
+					]
+				},
+				"whatever7": {
+					"dimensions": [0,0,16,24],
+					"parent": "whatever6",
+					"used by": [
+						["TODO",0]
+					]
+				}
+			}
 		}
 	]
 }
