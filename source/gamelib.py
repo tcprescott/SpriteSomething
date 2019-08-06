@@ -47,6 +47,8 @@ def autodetect(sprite_filename):
 				#open the sprite manifest for this game
 				with open(sprite_manifest_filename) as f:
 					sprite_manifest = json.load(f)
+					f.close()
+
 					#cycle through sprite IDs
 					for sprite_id in sprite_manifest:
 						#if we've got png data defined
@@ -99,6 +101,7 @@ def autodetect(sprite_filename):
 	elif file_extension.lower() == ".zspr":
 		with open(sprite_filename,"rb") as file:
 			zspr_data = bytearray(file.read())
+			file.close()
 		game = get_game_class_of_type(get_game_type_from_zspr_data(zspr_data))
 		sprite, animation_assist = game.make_sprite_by_number(get_sprite_number_from_zspr_data(zspr_data),sprite_filename)
 	else:
@@ -113,6 +116,7 @@ def autodetect_game_type_from_rom(rom):
 	rom_name = rom.get_name()
 	with open(common.get_resource(["meta","manifests"],"game_header_info.json")) as file:
 		game_header_info = json.load(file)
+		file.close()
 
 	game_names = []
 	for game_name, header_name_list in game_header_info.items():
@@ -185,6 +189,7 @@ class GameParent():
 		for background_manifest in background_manifests:
 			with open(background_manifest) as f:
 				background_data = json.load(f)
+				f.close()
 				for background in background_data["backgrounds"]:
 					self.background_datas["filename"][background["filename"]] = background["title"]
 					self.background_datas["title"][background["title"]] = background["filename"]
@@ -228,6 +233,7 @@ class GameParent():
 		#go into the manifest and get the actual name of the sprite
 		with open(common.get_resource([self.internal_name,"manifests"],"manifest.json")) as file:
 			manifest = json.load(file)
+			file.close()
 		if str(sprite_number) in manifest:
 			folder_name = manifest[str(sprite_number)]["folder name"]
 			#dynamic imports to follow

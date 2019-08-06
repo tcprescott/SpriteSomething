@@ -21,6 +21,7 @@ class AnimationEngineParent():
 
 		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
 			ani_manifest = json.load(file)
+			file.close()
 			#if we have many animation sets defined
 			if "sets" in ani_manifest:
 				#cycle through sets
@@ -187,6 +188,7 @@ class AnimationEngineParent():
 		if spiffy_manifest:
 			with open(spiffy_manifest) as f:
 				spiffy_list = json.load(f)
+				f.close()
 
 				for group in spiffy_list["button-groups"]:
 					group_key = group["group-fish-key"]
@@ -212,6 +214,7 @@ class AnimationEngineParent():
 		if direction_manifest:
 			with open(direction_manifest) as f:
 				direction_list = json.load(f)
+				f.close()
 
 				for group in direction_list["button-groups"]:
 					group_key = group["group-fish-key"]
