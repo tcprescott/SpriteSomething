@@ -124,6 +124,13 @@ class SpriteParent():
 
 	#the functions below here are special to the parent class and do not need to be overwritten, unless you see a reason
 
+	def load_layout(self):
+		self.layout = layoutlib.Layout(common.get_resource([self.resource_subpath,"manifests"],"layout.json"))
+	def load_animations(self):
+		with open(common.get_resource([self.resource_subpath,"manifests"],"animations.json")) as file:
+			self.animations = json.load(file)
+			file.close()
+
 	def import_from_filename(self):
 		file_extension = self.filename_parts["filext"]
 		if file_extension.lower() == '.png':
@@ -136,6 +143,7 @@ class SpriteParent():
 			_,rom_dir = os.path.split(rom_path)
 			rom_module = importlib.import_module(f"source.{rom_dir}.rom")
 			self.import_from_ROM(rom_module.RomHandler(self.filename))
+		self.import_cleanup()
 
 	def import_from_PNG(self):
 		self.images, self.master_palette = self.layout.extract_all_images_from_master(Image.open(self.filename))
@@ -191,43 +199,57 @@ class SpriteParent():
 			mod_frames = self.frame_getter() % self.frame_progression_table[-1]
 			self.pose_number = self.frame_progression_table.index(min([x for x in self.frame_progression_table if x > mod_frames]))
 
+	def get_supplemental_tiles(self,animation,direction,pose_number,palettes,frame_number):
+		return []
+
+	def import_cleanup(self):
+		pass
+
+	def get_alternate_tile(self, image_name):
+		raise AssertionError(f"Image called {image_name} not found!")
+
 	def get_tiles_for_pose(self, animation, direction, pose_number, palettes, frame_number):
 		pose_list = self.get_pose_list(animation, direction)
+		tile_list = pose_list[pose_number]["tiles"][::-1]
+		tile_list += self.get_supplemental_tiles(animation,direction,pose_number,palettes,frame_number)
+		if "displacement" in pose_list[pose_number]:
+			global_displacement = pose_list[pose_number]["displacement"]
+		else:
+			global_displacement = [0,0]
 		full_tile_list = []
-		for tile_info in pose_list[pose_number]["tiles"][::-1]:
-			base_image = self.images[tile_info["image"]]
+		for tile_info in tile_list:
+			#some poses have extra palette information, e.g. use "bunny" or "crystal_flash" palettes
+			# which can (whole or in part) override certain parts of the palette specified in the argument
+			new_palette = None
+			for possible_palette_info_location in [pose_list[pose_number], tile_info]:
+				if "palette" in possible_palette_info_location:
+					palette_info_location = possible_palette_info_location
+					new_palette = palette_info_location["palette"]
+
+			if new_palette:
+				palettes.append(new_palette)
+
+			base_image = self.images[tile_info["image"]] if tile_info["image"] in self.images else self.get_alternate_tile(tile_info["image"], palettes)
 			if "crop" in tile_info:
 				base_image = base_image.crop(tuple(tile_info["crop"]))
 			if "flip" in tile_info:
 				hflip = "h" in tile_info["flip"].lower()
 				vflip = "v" in tile_info["flip"].lower()
-				if hflip and vflip:
+				if (hflip and vflip) or "both" in tile_info["flip"].lower():
 					base_image = base_image.transpose(Image.ROTATE_180)
 				elif hflip:
 					base_image = base_image.transpose(Image.FLIP_LEFT_RIGHT)
 				elif vflip:
 					base_image = base_image.transpose(Image.FLIP_TOP_BOTTOM)
 
-			#some poses have extra palette information, e.g. use "bunny" or "crystal_flash" palettes
-			# which can (whole or in part) override certain parts of the palette specified in the argument
-			new_palette = None
-			if "palette" in pose_list[pose_number]:
-				new_palette = pose_list[pose_number]["palette"]
-			if "palette" in tile_info:
-				new_palette = tile_info["palette"]
-
-			if new_palette:
-				new_palette_type = new_palette[new_palette.rfind('_'):]
-				for i in range(len(palettes)):
-					if new_palette_type in palettes[i]:
-						palettes[i] = new_palette
-
 			default_range = self.layout.get_property("import palette interval", tile_info["image"])
 			this_palette = self.get_palette(palettes, default_range, frame_number)
 
 			base_image = common.apply_palette(base_image, this_palette)
 
-			full_tile_list.append((base_image,tile_info["pos"]))
+			position = [tile_info["pos"][i] + global_displacement[i] for i in range(2)]  #add the x and y coords
+
+			full_tile_list.append( (base_image,position) )
 
 		return full_tile_list
 

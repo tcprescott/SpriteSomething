@@ -5,6 +5,7 @@
 		"file.open": "Open",
 		"file.save": "Save As...",
 		"file.exit": "Exit",
+		"bundle": "Bundle",
 		"export": "Export",
 		"export.inject": "Inject into Game File",
 		"export.inject-new": "Copy to new Game File",
@@ -19,6 +20,7 @@
 		"plugins.game": "Game",
 		"plugins.sprite": "Sprite",
 		"help": "Help",
+		"help.check-for-updates": "Check for Updates",
 		"help.diagnostics": "Diagnostics",
 		"help.about": "About"
 	},
@@ -51,7 +53,8 @@
 		"author.name": "Author Name",
 		"author.name-short": "Author Name Short",
 		"background": "Background",
-		"animations": "Animations"
+		"animations": "Animations",
+		"step": "Step"
 	},
 	"tab": {
 		"animations": "Animations",

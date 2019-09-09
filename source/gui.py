@@ -4,8 +4,9 @@ import random									#for choosing random app titles
 import json										#for reading JSON
 import re											#for regexes in hyperlinks in about box
 import traceback							#for error reporting
-import os, sys								#for filesystem manipulation
+import os, stat, sys					#for filesystem manipulation
 import time										#for timekeeping
+import urllib									#for getting latest version number from GitHub Pages
 import webbrowser							#for launching browser from about box
 from functools import partial	#for passing parameters to user-triggered function calls
 from PIL import Image,ImageTk    #for converting PNG to formats that tk can use
@@ -70,10 +71,11 @@ class SpriteSomethingMainFrame(tk.Frame):
 			"export.animation-as-vcollage": "./"
 		}
 		#read saved working dirs file if it exists and set these
-		working_dir_path = os.path.join("user_resources","meta","manifests","working_dirs.json")
+		working_dir_path = os.path.join(".","user_resources","meta","manifests","working_dirs.json")
 		if os.path.exists(working_dir_path):
 			with open(working_dir_path) as json_file:
 				data = json.load(json_file)
+				json_file.close()
 				for k,v in data.items():
 					self.working_dirs[k] = v
 
@@ -107,6 +109,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 							name_dict[key].extend(item)
 						else:
 							name_dict[key] = item
+				name_file.close()
 		app_name = []
 		if random.choice([True,False]):
 			app_name.append(random.choice(name_dict["pre"]))
@@ -193,8 +196,8 @@ class SpriteSomethingMainFrame(tk.Frame):
 											])
 		menu_options.append(file_menu)
 
-		#create the import menu
-		import_menu = self.create_cascade(self.fish.translate("meta","menu","export"),"export_menu",
+		#create the export menu
+		export_menu = self.create_cascade(self.fish.translate("meta","menu","export"),"export_menu",
 											[
 													(self.fish.translate("meta","menu","export.inject"),"inject",self.inject_into_ROM),
 													(self.fish.translate("meta","menu","export.inject-new"),"inject-new",self.copy_into_ROM),
@@ -205,7 +208,46 @@ class SpriteSomethingMainFrame(tk.Frame):
 													(self.fish.translate("meta","menu","export.animation-as-hcollage"),"animation-as-hcollage",partial(self.export_animation_as_collage,"horizontal")),
 													#(self.fish.translate("meta","menu","export.animation-as-vcollage"),"animation-as-vcollage",None),#partial(self.export_animation_as_collage,"vertical")),
 											])
-		menu_options.append(import_menu)
+		menu_options.append(export_menu)
+
+		bundled_games = {}
+		bundled_sprites = []
+		root = "app_resources"
+		for gamedir in os.listdir(root):
+			if os.path.isdir(os.path.join(root,gamedir)):
+				if not gamedir == "meta":
+					with open(os.path.join(root,gamedir,"lang","en.json")) as en_lang:
+						en = json.load(en_lang)
+						if "game" in en:
+							if "name" in en["game"]:
+								bundled_games[gamedir] = {}
+								bundled_games[gamedir]["game"] = {}
+								bundled_games[gamedir]["game"]["internal name"] = gamedir
+								bundled_games[gamedir]["game"]["name"] = en["game"]["name"]
+								bundled_games[gamedir]["sprites"] = []
+					with open(os.path.join(root,gamedir,"manifests","manifest.json")) as game_manifest:
+						sprites = json.load(game_manifest)
+						for id,sprite in sprites.items():
+							if not id == "$schema":
+								name = sprite["name"]
+								folder = sprite["folder name"]
+								path = os.path.join(root,gamedir,folder,"sheets")
+								filename = ""
+								for filetype in [".rdc",".zspr",".png"]:
+									filepath = os.path.join(path,folder+filetype)
+									if os.path.isfile(filepath):
+										filename = filepath
+								bundled_games[gamedir]["sprites"].append((name,partial(self.load_sprite,filename)))
+					game_manifest.close()
+		bundle_menu = tk.Menu(self.menu, tearoff=0, name="bundle_menu")
+		for bundled_game in bundled_games:
+			bundled_game = bundled_games[bundled_game]
+			bundled_game_menu = tk.Menu(self.menu, tearoff=0, name="bundled_" + bundled_game["game"]["internal name"] + "_menu")
+			for sprite in bundled_game["sprites"]:
+				label,command = sprite
+				bundled_game_menu.add_command(label=label,command=command)
+			bundle_menu.add_cascade(label=bundled_game["game"]["name"], menu=bundled_game_menu)
+		self.menu.add_cascade(label=self.fish.translate("meta","menu","bundle"), menu=bundle_menu)
 
 		#for future implementation
 		plugins_menu = tk.Menu(self.menu, tearoff=0, name="plugins_menu")
@@ -216,6 +258,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 
 		help_menu = self.create_cascade(self.fish.translate("meta","menu","help"),"help_menu",
 											[
+													(self.fish.translate("meta","menu","help.check-for-updates"),None,self.check_for_updates),
 													(self.fish.translate("meta","menu","help.diagnostics"),"help-diagnostics",self.diagnostics),
 													(self.fish.translate("meta","menu","help.about"),"app",self.about),
 											])
@@ -255,6 +298,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 	#  sprite_filename: Filename of sprite to load
 	def load_sprite(self, sprite_filename):
 		self.game, self.sprite, self.animation_engine = gamelib.autodetect(sprite_filename)
+		self.fish.add_translation_file(self.game.internal_name)
 		self.fish.add_translation_file(self.sprite.resource_subpath)
 		self.sprite_coord = (100,100)        #an arbitrary default
 		self.attach_both_panels()            #remake the GUI panels
@@ -276,6 +320,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 					bindings_filename = common.get_resource(["meta","manifests"],"bindings.json")
 					with open(bindings_filename,encoding="utf-8") as f:
 						bindings = json.load(f)
+						f.close()
 					#cycle through all spiffy buttons
 					for subwidget in widget.winfo_children():
 						if "_button" in subwidget.winfo_name():
@@ -302,13 +347,14 @@ class SpriteSomethingMainFrame(tk.Frame):
 
 	def attach_left_panel(self):
 		#this same function can also be used to re-create the panel
-		MINSIZE = 25
+		BUTTON_HEIGHT = 26
 		vcr_controls = self.get_vcr_controls()  #have to do this early so that their values are available for other buttons
-		self.left_panel.add(self.get_reload_button(),minsize=MINSIZE)
+		self.left_panel.add(self.get_reload_button(),height=1 * BUTTON_HEIGHT)
 		self.attach_metadata_panel()
 		self.game.attach_background_panel(self.left_panel,self.canvas,self.zoom_getter,self.frame_getter,self.fish)
 		self.animation_engine.attach_animation_panel(self.left_panel,self.canvas,self.overview_canvas,self.zoom_getter,self.frame_getter,self.coord_getter,self.fish)
-		self.left_panel.add(vcr_controls,minsize=MINSIZE)
+		self.left_panel.add(vcr_controls,height=5 * BUTTON_HEIGHT)
+		self.animation_engine.attach_tile_details_panel(self.left_panel,self.fish)
 		self.panes.add(self.left_panel)
 
 	def attach_right_panel(self):
@@ -350,7 +396,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 		if not hasattr(self, "status_bar"):
 			self.status_bar = StatusBar(self)
 			self.status_bar.pack(side=tk.BOTTOM, fill=tk.X)
-		self.status_bar.set(self.game.name + ': "' + self.sprite.classic_name + '"')
+		self.status_bar.set(self.fish.translate(self.game.internal_name,"game","name") + ': "' + self.sprite.classic_name + '"')
 
 	def attach_canvas(self):
 		def move_sprite(event):
@@ -597,6 +643,7 @@ class SpriteSomethingMainFrame(tk.Frame):
 
 	def reload(self):
 		#activated when the reload button is pressed.  Should reload the sprite from the file but not manipulate the buttons
+		self.sprite.load_animations()
 		self.sprite.import_from_filename()
 		self.animation_engine.update_overview_panel()   #TODO: Need to decide if this belongs in animation_engine
 		self.animation_engine.update_animation()
@@ -732,6 +779,19 @@ class SpriteSomethingMainFrame(tk.Frame):
 		else:    #user cancelled out of the prompt, in which case report that you did not save (i.e. for exiting the program)
 			return False
 
+	def check_for_updates(self):
+		this_version = CONST.APP_VERSION
+		version_url = "https://artheau.github.io/SpriteSomething/app_resources/meta/manifests/app_version.txt"
+		version_req = urllib.request.urlopen(version_url)
+		latest_version = version_req.readlines()[0].decode("utf-8").strip()
+
+		if latest_version > this_version:
+			get_update = messagebox.askyesno(self.app_title,"It seems that there is an update available. Would you like to go to the project page to get it?")
+			if get_update:
+				webbrowser.open_new("https://github.com/Artheau/SpriteSomething/releases/v" + latest_version)
+		else:
+			messagebox.showinfo(self.app_title,"It seems that you're up to date!")
+
 	def diagnostics(self):
 		# Debugging purposes
 		dims = {
@@ -792,8 +852,12 @@ class SpriteSomethingMainFrame(tk.Frame):
 	# permissions error on linux here if the file doesn't exist yet for some reason but we don't want to clobber it if it already does
 	#  predicament/quandary/conundrum
 	def save_working_dirs(self):
-		f = open("./user_resources/meta/manifests/working_dirs.json","w+")
+		user_resources_path = os.path.join(".","user_resources")
+		working_dirs_path = os.path.join(user_resources_path,"meta","manifests")
+		f = open(os.path.join(working_dirs_path,"working_dirs.json"),"w+")
 		f.write(json.dumps(self.working_dirs,indent=2))
+		os.chmod(os.path.join(working_dirs_path,"working_dirs.json"),0o775)
+		f.close()
 
 	#exit sequence
 	def exit(self):
