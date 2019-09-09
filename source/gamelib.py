@@ -85,6 +85,7 @@ def autodetect(sprite_filename):
 		if not game_found:
 			raise AssertionError(f"Cannot recognize the type of file {sprite_filename} from its size: {loaded_image.size}")
 	elif file_extension.lower() == ".zip":
+		game_found = False
 		filebytes = os.path.getsize(sprite_filename)
 		search_path = "app_resources"
 		for item in os.listdir(search_path):
@@ -94,10 +95,17 @@ def autodetect(sprite_filename):
 				with open(sprite_manifest_filename) as f:
 					sprite_manifest = json.load(f)
 					for sprite_id in sprite_manifest:
-						if "input" in sprite_manifest[sprite_id] and "zip" in sprite_manifest[sprite_id]["input"] and "filesize" in sprite_manifest[sprite_id]["input"]["zip"] and filebytes in sprite_manifest[sprite_id]["input"]["zip"]["filesize"]:
-							game = get_game_class_of_type(game_name)
-							sprite, animation_assist = game.make_player_sprite(sprite_filename)
-							game_found = True
+						if "input" in sprite_manifest[sprite_id] and "zip" in sprite_manifest[sprite_id]["input"] and "filesize" in sprite_manifest[sprite_id]["input"]["zip"]:
+							filesizes = sprite_manifest[sprite_id]["input"]["zip"]["filesize"]
+							if len(filesizes) > 1:
+								if filesizes[0] < filebytes < filesizes[1]:
+									game_found = True
+							elif len(filesizes) == 1:
+								if filebytes == filesizes[0]:
+									game_found = True
+				if game_found:
+					game = get_game_class_of_type(game_name)
+					sprite, animation_assist = game.make_player_sprite(sprite_filename)
 	elif file_extension.lower() == ".zspr":
 		with open(sprite_filename,"rb") as file:
 			zspr_data = bytearray(file.read())

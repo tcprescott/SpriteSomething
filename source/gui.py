@@ -237,16 +237,18 @@ class SpriteSomethingMainFrame(tk.Frame):
 									filepath = os.path.join(path,folder+filetype)
 									if os.path.isfile(filepath):
 										filename = filepath
-								bundled_games[gamedir]["sprites"].append((name,partial(self.load_sprite,filename)))
+								if not filename == "":
+									bundled_games[gamedir]["sprites"].append((name,partial(self.load_sprite,filename)))
 					game_manifest.close()
 		bundle_menu = tk.Menu(self.menu, tearoff=0, name="bundle_menu")
 		for bundled_game in bundled_games:
 			bundled_game = bundled_games[bundled_game]
-			bundled_game_menu = tk.Menu(self.menu, tearoff=0, name="bundled_" + bundled_game["game"]["internal name"] + "_menu")
-			for sprite in bundled_game["sprites"]:
-				label,command = sprite
-				bundled_game_menu.add_command(label=label,command=command)
-			bundle_menu.add_cascade(label=bundled_game["game"]["name"], menu=bundled_game_menu)
+			if len(bundled_game["sprites"]) > 0:
+				bundled_game_menu = tk.Menu(self.menu, tearoff=0, name="bundled_" + bundled_game["game"]["internal name"] + "_menu")
+				for sprite in bundled_game["sprites"]:
+					label,command = sprite
+					bundled_game_menu.add_command(label=label,command=command)
+				bundle_menu.add_cascade(label=bundled_game["game"]["name"], menu=bundled_game_menu)
 		self.menu.add_cascade(label=self.fish.translate("meta","menu","bundle"), menu=bundle_menu)
 
 		#for future implementation
@@ -664,7 +666,14 @@ class SpriteSomethingMainFrame(tk.Frame):
 				else:      #chose not to save before opening
 					self.unsaved_changes = False
 
-		filename = filedialog.askopenfilename(initialdir=self.working_dirs["file.open"], title=self.fish.translate("meta","dialogue","file.open.title"), filetypes=((self.fish.translate("meta","dialogue","file.open.types.label"),"*.zspr *.png *.sfc *.smc"),))
+		filetypes = "*." + " *.".join(["zspr","png","sfc","smc","zip"])
+		filename = filedialog.askopenfilename(
+									initialdir=self.working_dirs["file.open"],
+									title=self.fish.translate("meta","dialogue","file.open.title"),
+									filetypes=((
+										self.fish.translate("meta","dialogue","file.open.types.label"),
+										filetypes
+									),))
 		if filename:
 			#if we've got a filename, set the working dir and load the sprite
 			self.working_dirs["file.open"] = filename[:filename.rfind('/')]

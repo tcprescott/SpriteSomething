@@ -9,6 +9,7 @@ import json
 import itertools
 import importlib
 import io
+from archive import extract
 from functools import partial
 from PIL import Image
 from source import layoutlib
@@ -23,13 +24,30 @@ class SpriteParent():
 		self.resource_subpath = my_subpath           #the path to this sprite's subfolder in resources
 		self.metadata = {"sprite.name": "","author.name":"","author.name-short":""}
 		self.filename = filename
+		self.filenames = []
 		self.filename_parts = {"basename":os.path.basename(filename),"slug":os.path.splitext(os.path.basename(filename))[0],"filext":os.path.splitext(filename)[1]}
+		self.filenames_parts = {self.filename_parts["slug"]:self.filename_parts}
 		self.overview_scale_factor = 2
 		if "input" in manifest_dict and "png" in manifest_dict["input"] and "overview-scale-factor" in manifest_dict["input"]["png"]:
 			self.overview_scale_factor = manifest_dict["input"]["png"]["overview-scale-factor"]
 		self.plugins = None
 		self.has_plugins = False
 		self.use_palettes = True
+
+		if self.filename_parts["filext"] == ".zip":
+			scratch_filepath = os.path.join("user_resources",self.resource_subpath,"sheets","scratch")
+			if not os.path.isdir(scratch_filepath):
+				os.makedirs(scratch_filepath)
+			extract(self.filename,scratch_filepath)
+			for r,d,f in os.walk(os.path.join(scratch_filepath,self.filename_parts["slug"])):
+				for file in f:
+					basename = os.path.basename(file)
+					slug = os.path.splitext(os.path.basename(file))[0]
+					filext = os.path.splitext(file)[1]
+					self.filenames.append(os.path.join(r,file))
+					self.filenames_parts[slug] = {"basename": basename,"slug":slug,"filext":filext}
+		else:
+			self.filenames.append(self.filename)
 
 		#get layout
 		layout_manifest = common.get_resource([self.resource_subpath,"manifests"],"layout.json")
