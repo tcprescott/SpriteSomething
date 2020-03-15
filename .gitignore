@@ -43,3 +43,6 @@ working_dirs.json
 custom/
 user_resources/metroid3/samus/sheets
 user_resources/zelda3/link/sheets
+
+# no virtual env
+/venv
