@@ -32,7 +32,7 @@ mkdir -p ../pages/app_resources/$game/lang/; \
 cp ./app_resources/$game/lang/* $_; \
 done
 
-#nuke GitHub pages files from source code
+#nuke GitHub pages files from SpriteSomethingPy code
 rm -rf ./pages_resources
 
 #if we're on windows, jot down a note of the files in the dir
@@ -40,7 +40,7 @@ if [ "${TRAVIS_OS_NAME}" == "windows" ]; then
 	ls -p > "../build/filename.txt"
 	chmod 775 "../build/filename.txt"
 	#use my pcregrep script to list binaries
-	${PYTHON_EXECUTABLE} ./source/fakepcregrep.py
+	${PYTHON_EXECUTABLE} ./SpriteSomethingPy/fakepcregrep.py
 	#get the first listing
 	BUILD_FILENAME=$(head -n 1 ../build/filename.txt)
 else
@@ -92,7 +92,7 @@ if [ "${BUILD_FILENAME}" != "" ]; then
 		mv ../${ZIP_FILENAME} ../deploy/${ZIP_FILENAME}
 		#echo ${DEST_FILENAME} > "../build/filename.txt"	#deploy binary
 		echo "../deploy/${ZIP_FILENAME}" > "../build/filename.txt"	#deploy archive
-		${PYTHON_EXECUTABLE} ./source/fakepcregrep.py
+		${PYTHON_EXECUTABLE} ./SpriteSomethingPy/fakepcregrep.py
 	else
 		#else, we're using tar
 		#move the zip to deployment folder

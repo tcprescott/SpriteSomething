@@ -4,9 +4,9 @@
 
 import os
 import sys
-if not os.path.exists("source"):
+if not os.path.exists("SpriteSomethingPy"):
 	os.chdir("..")
-	if not os.path.exists("source"):
+	if not os.path.exists("SpriteSomethingPy"):
 		raise AssertionError("cannot find the root folder from test_common.py")
 
 sys.path.append(os.getcwd())    #append the root folder to the python path, for imports

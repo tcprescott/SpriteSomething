@@ -14,9 +14,9 @@ import tkinter as tk   #testing tk wrappers
 import tempfile   #for mock-saving files, in order to check the validity of the save
 from PIL import ImageChops #for testing if images are same/different
 
-from source import gui #need to import the GUI to test it
-from source.zelda3.link import sprite as link_sprite_library
-from source.metroid3.samus import sprite as samus_sprite_library
+from SpriteSomethingPy import gui #need to import the GUI to test it
+from SpriteSomethingPy.zelda3.link import sprite as link_sprite_library
+from SpriteSomethingPy.metroid3.samus import sprite as samus_sprite_library
 
 class ExportAudit(unittest.TestCase):
 	def same(self, file1, file2):   #not a test, just a helper function

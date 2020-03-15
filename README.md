@@ -9,11 +9,11 @@ Download the latest version from our [GitHub repository](https://github.com/Arth
 ## How to run it
 
 There should be a bundled executable in the release that you downloaded.
-If you would like to run it from source, you can do so by running `SpriteSomething.py`
+If you would like to run it from SpriteSomethingPy, you can do so by running `SpriteSomething.py`
 
-### Building from source (optional)
+### Building from SpriteSomethingPy (optional)
 
-If you want to build an executable from source, you can use `build.py` and `SpriteSomething.spec` which should (in theory) be sufficient to build using `PyInstaller`.
+If you want to build an executable from SpriteSomethingPy, you can use `build.py` and `SpriteSomething.spec` which should (in theory) be sufficient to build using `PyInstaller`.
 
 The resulting executable will still require the source code and will run in place of `SpriteSomething.py`.
 

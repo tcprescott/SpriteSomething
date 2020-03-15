@@ -1,4 +1,4 @@
-# Building SpriteSomething from source
+# Building SpriteSomething from SpriteSomethingPy
 
 1. Get [python](http://python.org/downloads)
 1. Get the [SpriteSomething source code](https://github.com/Artheau/SpriteSomething/archive/master.zip)

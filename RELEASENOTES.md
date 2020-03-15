@@ -46,4 +46,4 @@ This first official release of SpriteSomething includes many basic features of t
 
 Executables for Linux (built on Ubuntu Bionic), MacOSX (built on 10.14 xcode 10.2) and Windows (built on Windows 10 v1803) all built on python 3.7 are available.
 
-If you would prefer to run/build from source, you can download the source code for this release below.  See `BUILDING.md` for instructions.
+If you would prefer to run/build from SpriteSomethingPy, you can download the source code for this release below.  See `BUILDING.md` for instructions.
